@@ -4,7 +4,7 @@ import decimal
 import numpy as np
 import tensorflow as tf
 
-from src.non_maximum_suppression import non_max_suppression_fast
+from hand_tracker_src.non_maximum_suppression import non_max_suppression_fast
 
 
 class HandTracker():
