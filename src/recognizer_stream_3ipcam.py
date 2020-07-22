@@ -256,6 +256,11 @@ while True:
                     else:
                         _, k = CosineSimilarity(embedding_In, previous_embedding)
                         name = new_labels[k]
+                        if '+' in name:
+                            menustr, namestr = name.split("+", 1)
+                            if menustr != '1':
+                                name = "1+"+namestr
+                                new_labels[k] = name
                         text_In = "{}".format(name)
 
                 # Start tracking
@@ -333,6 +338,11 @@ while True:
                     else:
                         _, k = CosineSimilarity(embedding_In, previous_embedding)
                         name = new_labels[k]
+                        if '+' in name:
+                            menustr, namestr = name.split("+", 1)
+                            if menustr != '2':
+                                name = "2+"+namestr
+                                new_labels[k] = name
                         text_In = "{}".format(name)
 
                 # Start tracking
@@ -472,7 +482,7 @@ while True:
         cv2.namedWindow("Input_cam2")
         cv2.moveWindow("Output_cam", 840, 30)
         cv2.moveWindow("Input_cam1", 40, 30)
-        cv2.moveWindow("Input_cam2", 40, 660)        
+        cv2.moveWindow("Input_cam2", 40, 540)        
         frame = cv2.resize(frame, (320, 240))
         frame_In = cv2.resize(frame_In, (320, 240))
         frame_In2 = cv2.resize(frame_In2, (320, 240))
