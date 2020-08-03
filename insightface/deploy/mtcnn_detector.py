@@ -26,7 +26,8 @@ class MtcnnDetector(object):
                  factor = 0.709,
                  num_worker = 1,
                  accurate_landmark = False,
-                 ctx=mx.cpu()):
+                 #ctx=mx.cpu()):
+                 ctx=mx.gpu(0)):
         """
             Initialize the detector
 
@@ -333,6 +334,8 @@ class MtcnnDetector(object):
 
             # detected boxes
             total_boxes = []
+            #height = mx.image.resize_short(height,0.5)
+            #width = mx.image.resize_short(width,0.5)
 
             minl = min( height, width)
 
@@ -468,9 +471,10 @@ class MtcnnDetector(object):
         pick = nms(total_boxes, 0.7, 'Min')
         total_boxes = total_boxes[pick]
         points = points[pick]
+        print(total_boxes)
         
         if not self.accurate_landmark:
-            return total_boxes, points
+            return total_boxes,points
 
         #############################################
         # extended stage
@@ -510,7 +514,7 @@ class MtcnnDetector(object):
         points = np.hstack([pointx, pointy])
         points = points.astype(np.int32)
 
-        return total_boxes, points
+        return total_boxes,points
 
 
 
